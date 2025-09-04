@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-Widget circularProgress() {
+Widget circularProgress(context) {
+  final themecolor = Theme.of(context).colorScheme;
+
   return Center(
     child: Container(
       width: 80,
@@ -17,13 +19,13 @@ Widget circularProgress() {
           ),
         ],
       ),
-      child: const Center(
+      child: Center(
         child: SizedBox(
           width: 50,
           height: 50,
           child: CircularProgressIndicator(
             strokeWidth: 3,
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.teal),
+            valueColor: AlwaysStoppedAnimation<Color>(themecolor.secondary),
           ),
         ),
       ),

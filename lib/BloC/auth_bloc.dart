@@ -2,7 +2,7 @@ import 'package:alqasim_market/BloC/states/auth_states.dart';
 import 'package:alqasim_market/models/login_model.dart';
 import 'package:alqasim_market/models/signup_model.dart';
 import 'package:alqasim_market/network/remote/diohelper.dart';
-import 'package:alqasim_market/utilites/endpoint/endpoint.dart';
+import 'package:alqasim_market/const/endpoint.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,30 +19,27 @@ class AuthBloc extends Cubit<AuthState> {
     emit(ChangPasswordIconVisibilityState());
   }
 
-  login(String email, String password) {
+  authLogin(String email, String password) {
     emit(LoadingLoginState());
-    DioHelper.postData(url: LOGIN, data: {'email': email, 'password': password})
+    DioHelper.postData(url: login, data: {'email': email, 'password': password})
         .then((value) {
           loginModel = LoginModel.fromJson(value.data);
-          print(value.data);
 
           if (loginModel.status!) {
             emit(SuccssesLoginState(loginModel.token.toString()));
           }
         })
         .catchError((e) {
-          print(e);
-
           emit(ErrorLoginState());
         });
   }
 
   late SignUpModel signupModel;
 
-  signup(String username, String email, String password) {
+  authSignup(String username, String email, String password) {
     emit(LoadingSignupState());
     DioHelper.postData(
-          url: SIGNUP,
+          url: register,
           data: {'username': username, 'email': email, 'password': password},
         )
         .then((value) {

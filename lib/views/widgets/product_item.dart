@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 Widget buildProductItem(BuildContext context, product) {
+  final theme = Theme.of(context);
+  final colorScheme = theme.colorScheme;
   return GestureDetector(
     onTap: () {
       // Navigator.of(context).push(
@@ -13,7 +15,7 @@ Widget buildProductItem(BuildContext context, product) {
     child: Center(
       child: Card(
         elevation: 6,
-        color: Colors.white,
+        color: colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: SizedBox(
           width: 200,
@@ -23,9 +25,9 @@ Widget buildProductItem(BuildContext context, product) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildProductImage(product),
+                _buildProductImage(context, product),
                 const SizedBox(height: 5.0),
-                _buildProductInfo(product, false),
+                _buildProductInfo(context, product, false),
               ],
             ),
           ),
@@ -67,15 +69,15 @@ Widget buildProductItemHorizontal(BuildContext context, product) {
                       child: _buildMainImage(product),
                     ),
                     if (_hasDiscount(product)) _buildDiscountBadge(),
-                    _buildAddToCartButton(),
-                    _buildPriceTag(product),
+                    _buildAddToCartButton(context),
+                    _buildPriceTag(context, product),
                   ],
                 ),
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: _buildProductInfo(product, true),
+                  child: _buildProductInfo(context, product, true),
                 ),
               ),
             ],
@@ -86,7 +88,7 @@ Widget buildProductItemHorizontal(BuildContext context, product) {
   );
 }
 
-Widget _buildProductImage(product) {
+Widget _buildProductImage(context, product) {
   return ClipRRect(
     borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
     child: Stack(
@@ -94,8 +96,8 @@ Widget _buildProductImage(product) {
       children: [
         _buildMainImage(product),
         if (_hasDiscount(product)) _buildDiscountBadge(),
-        _buildAddToCartButton(),
-        _buildPriceTag(product),
+        _buildAddToCartButton(context),
+        _buildPriceTag(context, product),
       ],
     ),
   );
@@ -113,7 +115,7 @@ Widget _buildMainImage(product) {
   );
 }
 
-Widget _buildProductInfo(product, bool isHorizon) {
+Widget _buildProductInfo(context, product, bool isHorizon) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -146,10 +148,10 @@ Widget _buildProductInfo(product, bool isHorizon) {
                     Text(
                       '${product.price}SP',
                       maxLines: 1,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.teal,
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
                     ),
                     if (product.oldPrice != null &&
@@ -223,13 +225,13 @@ Widget _buildDiscountBadge() {
   );
 }
 
-Widget _buildAddToCartButton() {
+Widget _buildAddToCartButton(context) {
   return Align(
     alignment: Alignment.bottomLeft,
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: CircleAvatar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         child: IconButton(
           onPressed: () {},
           icon: const Icon(Icons.add, color: Colors.white),
@@ -239,7 +241,7 @@ Widget _buildAddToCartButton() {
   );
 }
 
-Widget _buildPriceTag(product) {
+Widget _buildPriceTag(context, product) {
   return Positioned(
     top: 8,
     right: 8,
@@ -247,7 +249,7 @@ Widget _buildPriceTag(product) {
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
         // ignore: deprecated_member_use
-        color: Colors.teal.withOpacity(0.8),
+        color: Theme.of(context).colorScheme.secondary.withOpacity(0.8),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(

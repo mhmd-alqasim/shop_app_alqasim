@@ -179,12 +179,12 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                         if (_formkey.currentState!.validate()) {
                           if (_authType == AuthFormType.login) {
                             // Login logic
-                            AuthBloc.get(context).login(
+                            AuthBloc.get(context).authLogin(
                               _emailcontroller.text,
                               _passwordcontroller.text,
                             );
                           } else {
-                            AuthBloc.get(context).signup(
+                            AuthBloc.get(context).authSignup(
                               _namecontroller.text,
                               _emailcontroller.text,
                               _passwordcontroller.text,

@@ -3,6 +3,7 @@ import 'package:alqasim_market/BloC/auth_bloc.dart';
 import 'package:alqasim_market/BloC/search_bloc.dart';
 import 'package:alqasim_market/network/local/cache_helper.dart';
 import 'package:alqasim_market/network/remote/diohelper.dart';
+import 'package:alqasim_market/theme/app_theme.dart' show AppTheme;
 import 'package:alqasim_market/utilites/bloc_observes.dart';
 import 'package:alqasim_market/utilites/routers/routes.dart';
 import 'package:alqasim_market/views/pages/authentication_page.dart';
@@ -48,28 +49,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xFFe5e5e5),
-          primarySwatch: Colors.red,
-          primaryColor: Colors.red,
-          fontFamily: 'Cairo',
-          inputDecorationTheme: InputDecorationTheme(
-            labelStyle: Theme.of(context).textTheme.titleSmall,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2.0),
-              borderSide: const BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2.0),
-              borderSide: const BorderSide(color: Colors.grey),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(2.0),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-          ),
-        ),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.light,
 
         onGenerateRoute: AppRouter.generateRoute,
         home: initialScreen,

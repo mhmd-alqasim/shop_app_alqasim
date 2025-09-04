@@ -12,38 +12,27 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final _controller = PersistentTabController(initialIndex: 0);
+
   List<Widget> _buildScreens() {
     return [HomePage(), HomePage()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    // final textTheme = theme.textTheme; اذا بدي اغير حجم الخط
     return [
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
         title: ("Home"),
-        activeColorPrimary: Colors.amber,
-        inactiveColorPrimary: Colors.amber,
-        // scrollController: _scrollController1,
-        // routeAndNavigatorSettings: RouteAndNavigatorSettings(
-        //   initialRoute: "/",
-        //   routes: {
-        //     // "/second": (final context) => const MainScreen3(),
-        //   },
-        // ),
+        activeColorPrimary: colorScheme.primary,
+        inactiveColorPrimary: colorScheme.secondary,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.settings),
         title: ("Settings"),
-        activeColorPrimary: Colors.amber,
-        inactiveColorPrimary: Colors.grey,
-        // scrollController: _scrollController2,
-        // routeAndNavigatorSettings: RouteAndNavigatorSettings(
-        //   initialRoute: "/",
-        //   routes: {
-        //     "/first": (final context) => const MainScreen2(),
-        //     "/second": (final context) => const MainScreen3(),
-        //   },
-        // ),
+        activeColorPrimary: colorScheme.primary,
+        inactiveColorPrimary: colorScheme.secondary,
       ),
     ];
   }
@@ -51,7 +40,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Alqasim')),
       body: PersistentTabView(
         context,
         controller: _controller,
@@ -64,7 +52,8 @@ class _MainPageState extends State<MainPage> {
         hideNavigationBarWhenKeyboardAppears: true,
         // popBehaviorOnSelectedNavBarItemPress: PopActionScreensType.all,
         padding: const EdgeInsets.only(top: 8),
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor:
+            Theme.of(context).colorScheme.surface, // Default is Colors.white.
         isVisible: true,
         animationSettings: const NavBarAnimationSettings(
           navBarItemAnimation: ItemAnimationSettings(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 Widget buildCategory(category, double W, double H, context) {
+  final themecolor = Theme.of(context).colorScheme;
+
   return GestureDetector(
     onTap: () {
       // Navigator.of(context).push(
@@ -18,7 +20,7 @@ Widget buildCategory(category, double W, double H, context) {
             height: H,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.teal, width: 4),
+              border: Border.all(color: themecolor.primary, width: 4),
               image: DecorationImage(
                 image: NetworkImage('${category.image}'),
                 fit: BoxFit.cover,

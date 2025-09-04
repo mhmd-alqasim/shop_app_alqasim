@@ -1,7 +1,7 @@
 import 'package:alqasim_market/BloC/states/app_states.dart';
 import 'package:alqasim_market/models/home_model.dart';
 import 'package:alqasim_market/network/remote/diohelper.dart';
-import 'package:alqasim_market/utilites/endpoint/endpoint.dart';
+import 'package:alqasim_market/const/endpoint.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBloc extends Cubit<AppState> {

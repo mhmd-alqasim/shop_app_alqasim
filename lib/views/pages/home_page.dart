@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                       child: bodyHome(context, cubit),
                     ),
                   )
-                  : Center(child: circularProgress()),
+                  : Center(child: circularProgress(context)),
         );
       },
     );
@@ -101,6 +101,7 @@ class _HomePageState extends State<HomePage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: buildCarouselSlider(
+            context: context,
             autoPlayInterval: const Duration(seconds: 10),
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             images:

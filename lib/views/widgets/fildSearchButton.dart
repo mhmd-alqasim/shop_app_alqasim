@@ -1,18 +1,18 @@
+import 'package:alqasim_market/views/pages/search_page.dart';
 import 'package:flutter/material.dart';
 
 Widget fildSearchButton(context) {
+  final themecolor = Theme.of(context).colorScheme;
   return GestureDetector(
     onTap: () {
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (context) => SearchScreen(),
-      //   ),
-      // );
+      Navigator.of(
+        context,
+      ).push(MaterialPageRoute(builder: (context) => SearchPage()));
     },
     child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.teal),
+        border: Border.all(color: themecolor.secondary),
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
@@ -24,16 +24,16 @@ Widget fildSearchButton(context) {
           ),
         ],
       ),
-      child: const Padding(
+      child: Padding(
         padding: EdgeInsets.all(15.0),
         child: Row(
           children: [
-            Icon(Icons.search, color: Colors.teal), // أيقونة البحث
+            Icon(Icons.search, color: themecolor.primary), // أيقونة البحث
             SizedBox(width: 10.0),
             Text(
               'Search...',
               style: TextStyle(
-                color: Colors.teal,
+                color: themecolor.primary,
                 fontWeight: FontWeight.bold,
               ), // نص إرشادي
             ),

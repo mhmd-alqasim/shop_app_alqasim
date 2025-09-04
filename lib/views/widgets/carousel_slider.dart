@@ -13,7 +13,10 @@ Widget buildCarouselSlider({
   Axis scrollDirection = Axis.horizontal,
   void Function(int index, CarouselPageChangedReason reason)? onPageChanged,
   bool isBoxFitcover = false,
+  required BuildContext context,
 }) {
+  final themecolor = Theme.of(context).colorScheme;
+
   return CarouselSlider(
     options: CarouselOptions(
       height: height,
@@ -30,11 +33,11 @@ Widget buildCarouselSlider({
           return Container(
             padding: const EdgeInsets.all(4), // المسافة بين الصورة والإطار
             decoration: BoxDecoration(
-              color: Colors.teal, // لون الإطار الخارجي
+              color: themecolor.primary, // لون الإطار الخارجي
               borderRadius: BorderRadius.circular(16), // انحناء الزوايا
               boxShadow: [
                 BoxShadow(
-                  color: Colors.teal, // لون الظل
+                  color: themecolor.primary, // لون الظل
                   blurRadius: 5, // نصف قطر الظل
                   offset: Offset(0, 5), // إزاحة الظل
                 ),
