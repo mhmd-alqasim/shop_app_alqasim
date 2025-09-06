@@ -1,3 +1,4 @@
+import 'package:alqasim_market/utilites/routers/routes.dart';
 import 'package:flutter/material.dart';
 
 Widget buildCategory(category, double W, double H, context) {
@@ -5,11 +6,10 @@ Widget buildCategory(category, double W, double H, context) {
 
   return GestureDetector(
     onTap: () {
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (context) => Detailcategoriesscreen(id: category.id),
-      //   ),
-      // );
+      Navigator.of(
+        context,
+        rootNavigator: true,
+      ).pushNamed(AppRouter.categoriesDetailsPageRoute, arguments: category.id);
     },
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
