@@ -17,3 +17,16 @@ class ErorrProductState extends AppState {
 }
 
 class ChangeIndexStates extends AppState {}
+
+////////////
+class LoadingCategoriesState extends AppState {}
+
+class SuccessCategoriesState extends AppState {}
+
+class ErrorCategoriesState extends AppState {}
+
+class LoadingCategoryDetailsState extends AppState {}
+
+class SuccessCategoryDetailsState extends AppState {}
+
+class ErrorCategoryDetailsState extends AppState {}

@@ -1,4 +1,5 @@
 import 'package:alqasim_market/BloC/states/app_states.dart';
+import 'package:alqasim_market/models/categories_model.dart';
 import 'package:alqasim_market/models/home_model.dart';
 import 'package:alqasim_market/models/product_model.dart';
 import 'package:alqasim_market/network/remote/diohelper.dart';
@@ -47,11 +48,57 @@ class AppBloc extends Cubit<AppState> {
           if (productmodel!.status!) {
             emit(SccessProductState());
           } else {
+            print(productmodel!.status);
             emit(ErorrProductState(productmodel!.status));
           }
         })
         .catchError((e) {
+          print(e);
           emit(ErorrProductState(e));
+        });
+  }
+
+  CategoriesModel? categoriesModel;
+  CategorieDetailsModel? categoryDetailsModel;
+
+  void getCategoriesData() {
+    emit(LoadingCategoriesState());
+
+    DioHelper.getData(url: CATEGORY)
+        .then((value) {
+          categoriesModel = CategoriesModel.fromJson(value.data);
+
+          if (categoriesModel!.status == true) {
+            emit(SuccessCategoriesState());
+          } else {
+            emit(ErrorCategoriesState());
+          }
+        })
+        .catchError((error) {
+          emit(ErrorCategoriesState());
+        });
+  }
+
+  void getCategoryDetails(int id) {
+    emit(LoadingCategoryDetailsState());
+
+    // أفضل ممارسة هي استخدام GET مع ID في الرابط
+    DioHelper.postData(url: CATEGORYDETAILS, data: {'id': id})
+        .then((value) {
+          categoryDetailsModel = CategorieDetailsModel.fromJson(value.data);
+
+          if (categoryDetailsModel!.status == true) {
+            emit(SuccessCategoryDetailsState());
+          }
+        })
+        .catchError((error) {
+          // إرسال رسالة خطأ واضحة
+          print("Error: ${error.toString()}");
+          emit(
+            ErrorCategoryDetailsState(
+              // message: error.toString()
+            ),
+          );
         });
   }
 }
