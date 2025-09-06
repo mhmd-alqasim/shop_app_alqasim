@@ -1,5 +1,6 @@
 import 'package:alqasim_market/BloC/states/app_states.dart';
 import 'package:alqasim_market/models/home_model.dart';
+import 'package:alqasim_market/models/product_model.dart';
 import 'package:alqasim_market/network/remote/diohelper.dart';
 import 'package:alqasim_market/const/endpoint.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,13 @@ class AppBloc extends Cubit<AppState> {
   static AppBloc get(context) => BlocProvider.of(context);
 
   HomeModel? homeModel;
+  ProductModel? productmodel;
+  int currentIndex = 0;
+
+  void changeIndex(int index) {
+    currentIndex = index;
+    emit(ChangeIndexStates()); // تحديث الفهرس
+  }
 
   void getHomeData(context) {
     emit(LoadingHomeState());
@@ -28,6 +36,22 @@ class AppBloc extends Cubit<AppState> {
         })
         .catchError((error) {
           emit(ErorrHomeState());
+        });
+  }
+
+  productdetail(int id) {
+    emit(LoadingProductState());
+    DioHelper.postData(url: PRODUCT, data: {'id': id})
+        .then((value) {
+          productmodel = ProductModel.fromJson(value.data);
+          if (productmodel!.status!) {
+            emit(SccessProductState());
+          } else {
+            emit(ErorrProductState(productmodel!.status));
+          }
+        })
+        .catchError((e) {
+          emit(ErorrProductState(e));
         });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:alqasim_market/utilites/routers/routes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -6,11 +7,10 @@ Widget buildProductItem(BuildContext context, product) {
   final colorScheme = theme.colorScheme;
   return GestureDetector(
     onTap: () {
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (context) => ProductScreen(id: product.id),
-      //   ),
-      // );
+      Navigator.of(
+        context,
+        rootNavigator: true,
+      ).pushNamed(AppRouter.productPageRoute, arguments: product.id);
     },
     child: Center(
       child: Card(
@@ -38,18 +38,18 @@ Widget buildProductItem(BuildContext context, product) {
 }
 
 Widget buildProductItemHorizontal(BuildContext context, product) {
+  final theme = Theme.of(context);
+  final colorScheme = theme.colorScheme;
   return GestureDetector(
     onTap: () {
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (context) => ProductScreen(id: product.id),
-      //   ),
-      // );
+      Navigator.of(
+        context,
+      ).popAndPushNamed(AppRouter.productPageRoute, arguments: product.id);
     },
     child: Center(
       child: Card(
         elevation: 6,
-        color: Colors.white,
+        color: colorScheme.surface,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         child: SizedBox(
           width: 320,

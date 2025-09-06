@@ -56,7 +56,7 @@ class SearchPage extends StatelessWidget {
                                 // color: defultcolor
                               ),
                               borderRadius: BorderRadius.circular(30),
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.surface,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.2),
