@@ -1,4 +1,4 @@
-import 'package:alqasim_market/views/pages/search_page.dart';
+import 'package:alqasim_market/utilites/routers/routes.dart';
 import 'package:flutter/material.dart';
 
 Widget fildSearchButton(context) {
@@ -7,13 +7,14 @@ Widget fildSearchButton(context) {
     onTap: () {
       Navigator.of(
         context,
-      ).push(MaterialPageRoute(builder: (context) => SearchPage()));
+        rootNavigator: true,
+      ).pushNamed(AppRouter.searchPageRoute);
     },
     child: Container(
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
         border: Border.all(color: themecolor.secondary),
-        color: Colors.white,
+        color: themecolor.surface.withOpacity(0.2),
         borderRadius: BorderRadius.circular(25),
         boxShadow: [
           BoxShadow(

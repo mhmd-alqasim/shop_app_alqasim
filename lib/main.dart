@@ -6,9 +6,6 @@ import 'package:alqasim_market/network/remote/diohelper.dart';
 import 'package:alqasim_market/theme/app_theme.dart' show AppTheme;
 import 'package:alqasim_market/utilites/bloc_observes.dart';
 import 'package:alqasim_market/utilites/routers/routes.dart';
-import 'package:alqasim_market/views/pages/authentication_page.dart';
-import 'package:alqasim_market/views/pages/landing_page.dart';
-import 'package:alqasim_market/views/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,14 +28,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget initialScreen;
-
+    String initialRoute;
     if (isauth) {
-      initialScreen = MainPage();
+      initialRoute = AppRouter.mainPageRoute;
     } else if (!isauth) {
-      initialScreen = AuthenticationPage();
+      initialRoute = AppRouter.authPageRoute;
     } else {
-      initialScreen = LandingPage();
+      initialRoute = AppRouter.landingPageRoute;
     }
 
     return MultiBlocProvider(
@@ -51,10 +47,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.light,
-
+        themeMode: ThemeMode.dark,
+        initialRoute: initialRoute,
+        // Keep `onGenerateRoute` to handle all other routes.
         onGenerateRoute: AppRouter.generateRoute,
-        home: initialScreen,
       ),
     );
   }
